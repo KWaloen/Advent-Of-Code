@@ -1,3 +1,4 @@
+# Part 1
 
 with open("2024\Day_1\input","r") as file:
     text = file.read()
@@ -23,5 +24,23 @@ listToSum = []
 for i in range(len(leftList)):
     listToSum.append((abs(leftList[i]-rightList[i])))
 
-print(sum(listToSum))
+sum(listToSum)
+
+# --------------------------------------------------------- #
+
+# Part 2
+
+leftListSimilarity = {}
+leftListSimilaritySum = 0
+rightListSimilarity = {}
+rightListSimilaritySum = 0
+
+for leftElement in leftList:
+    
+    if leftElement in rightList:
+        occurance = rightList.count(leftElement)
+        if occurance != 0:
+            leftListSimilaritySum += (leftElement * occurance)
+
+    
 
