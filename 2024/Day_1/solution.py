@@ -30,10 +30,8 @@ sum(listToSum)
 
 # Part 2
 
-leftListSimilarity = {}
 leftListSimilaritySum = 0
-rightListSimilarity = {}
-rightListSimilaritySum = 0
+
 
 for leftElement in leftList:
     
@@ -41,6 +39,7 @@ for leftElement in leftList:
         occurance = rightList.count(leftElement)
         if occurance != 0:
             leftListSimilaritySum += (leftElement * occurance)
+
 
     
 
