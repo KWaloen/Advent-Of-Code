@@ -32,7 +32,6 @@ sum(listToSum)
 
 leftListSimilaritySum = 0
 
-
 for leftElement in leftList:
     
     if leftElement in rightList:
