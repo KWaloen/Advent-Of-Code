@@ -16,40 +16,27 @@ for elements in row:
 for level in levelArrays: 
     numLevelArray.append(list(map(int, level)))
     
+# Process each row
 for level in numLevelArray:
     safe = True
-    
-    print("new row")
-    
-    if ((level[0] - level[-1]) > 0):
-        for i in range(len(level) - 1):
-            if (level[i] >= level[i+1] and abs(level[i] - level[i+1]) < 3):
-                print(level[i], "-", level[i+1], level[i] - level[i+1])
-                
-            else:
-                safe = False
-                print("unsafe")
-                break
-            
-    if ((level[0] - level[-1] < 0)):
-        for i in range(len(level) - 1):
-            if (level[i] <= level[i+1] and abs(level[i] - level[i+1]) < 3):
-                print(level[i], "-", level[i+1], level[i] - level[i+1])
-                
-            else:
-                safe = False
-                print("unsafe")
-                break
-            
-    if safe == True:
-        numberSafe += 1
-            
-print(numberSafe)
-            
 
-            
-             
-        
-        
-    
-    
+    increasing = None  
+    for i in range(len(level) - 1):
+        diff = level[i + 1] - level[i]
+
+        if abs(diff) < 1 or abs(diff) > 3:
+            safe = False
+            break
+
+        if increasing is None:
+            if diff > 0:
+                increasing = True
+            elif diff < 0:
+                increasing = False
+
+        elif (increasing and diff < 0) or (not increasing and diff > 0):
+            safe = False
+            break
+
+    if safe:
+        numberSafe += 1
