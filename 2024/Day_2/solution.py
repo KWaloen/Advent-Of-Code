@@ -46,7 +46,7 @@
 
 #part 2
 
-with open("2024\Day_2\input","r") as file:
+with open("2024/Day_2/input","r") as file:
     text = file.read()
 
 row = text.rsplit("\n")
@@ -62,24 +62,22 @@ for elements in row:
         
 for level in levelArrays: 
     numLevelArray.append(list(map(int, level)))
-    
-for level in numLevelArray:
-    safe = True
-    dampener = 1
 
+for level in numLevelArray:
+    flaws = 0
     increasing = None  
+    new_level = []  # Collect valid elements here
+
+    # Iterate over level without modifying it
     for i in range(len(level) - 1):
         diff = level[i + 1] - level[i]
 
         if abs(diff) < 1 or abs(diff) > 3:
-            if dampener == 0:
-                safe = False
-                print("dampener 0", level)
-                break
-            
-            dampener -= 1
-            continue
-            
+            flaws += 1
+            continue  # Skip adding this element to new_level
+
+        new_level.append(level[i])  # Add valid elements
+
         if increasing is None:
             if diff > 0:
                 increasing = True
@@ -87,15 +85,14 @@ for level in numLevelArray:
                 increasing = False
 
         elif (increasing and diff < 0) or (not increasing and diff > 0):
-            if dampener == 0:
-                safe = False
-                print("dampener 0", level)
-                break
-            
-            dampener -= 1
-            continue
-            
-    if safe:
+            flaws += 1
+
+    # Add the last element (not included in the loop) to new_level
+    new_level.append(level[-1])
+
+    if flaws < 2:
         numberSafe += 1
-        
+    if flaws > 2:
+        print(new_level)  # Print the cleaned level list
+
 print(numberSafe)

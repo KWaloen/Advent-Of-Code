@@ -1,6 +1,6 @@
 # Part 1
 
-with open("2024\Day_1\input","r") as file:
+with open("2024/Day_1/input","r") as file:
     text = file.read()
 
 row = text.rsplit("\n")
